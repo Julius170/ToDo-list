@@ -37,10 +37,12 @@ app.post('/', (req, res)=>{
         res.redirect("/");
         
     }
-
-
-
 });
+
+app.get("/about", (req, res)=>{
+    res.render("about")
+}
+)
 
 app.get("/work", (req, res) => {
     res.render("list", {listTitle: "Work List", newListItems:workItems});
@@ -52,7 +54,7 @@ app.post("/work", (req, res) => {
     let item = req.body.newItem;
     workItems.push(item);
     res.redirect("/work")
-})
+});
 
 
 app.listen (3010, function() {
