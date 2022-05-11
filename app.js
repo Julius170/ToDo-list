@@ -134,9 +134,9 @@ app.get("/:anotherToDoList", (req, res) => {
 });
 
 
-let  port = process.env.PORT;
+let port = process.env.PORT;
 if (port == null || port == "") {
-    port = 3010;
+  port = 3010;
 }
 
 app.listen (3010, function() {
