@@ -50,12 +50,12 @@ app.get("/", function(req, res) {
                     console.log(err);
                 } else {
                     console.log("Item successfully added to database");
+                    res.redirect("/");
                 }
             });
-            res.redirect("/");
+            
         }
         else {
-            console.log (foundItem)
             res.render ("list", {listTitle: "Today", newListItems: foundItem});
         }
     });
@@ -115,18 +115,17 @@ app.get("/:anotherToDoList", (req, res) => {
     const anotherToDoList = _.capitalize(req.params.anotherToDoList);
     List.findOne({name:anotherToDoList}, function(err, foundList) {
         if (!err) {
-            if (foundList) { 
-                // Show the existing list
-                res.render("list", {listTitle:foundList.name, newListItems: foundList.items})
-            } else {
+            if (!foundList) { 
                 // Create a new list 
                 const list = new List({
                     name: anotherToDoList,
                     items: defaultItems
                 });
                 list.save();
-                res.render("list", {listTitle:foundList, newListItems: foundList});
                 res.redirect("/"+ anotherToDoList);
+            } else {
+                // Show the existing list
+                res.render("list", {listTitle:foundList.name, newListItems: foundList.items})
             }
         }else {
             console.log(err);
