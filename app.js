@@ -134,9 +134,13 @@ app.get("/:anotherToDoList", (req, res) => {
 });
 
 
+let  port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3010;
+}
 
 app.listen (3010, function() {
-    console.log("Server is runing on port http://localhost:3010")
+    console.log("Server has started succesfully!");
 });
 
 
