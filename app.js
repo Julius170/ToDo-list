@@ -55,6 +55,7 @@ app.get("/", function(req, res) {
             res.redirect("/");
         }
         else {
+            console.log (foundItem)
             res.render ("list", {listTitle: "Today", newListItems: foundItem});
         }
     });
@@ -90,12 +91,12 @@ app.post('/delete', function(req, res) {
     const checkedItemId = (req.body.checkbox);
     if (listName === "Today") {
         Item.findByIdAndRemove(checkedItemId, function(err) {
-        if (err) {
-                console.log(err);
-            } else {
-                console.log("Checked item successfully removed");
-                res.redirect('/');
-            }
+            if (err) {
+            console.log(err);
+        } else {
+            console.log("Checked item successfully removed");
+            res.redirect('/');
+        };
         });
     } else{
         List.findOneAndUpdate(
