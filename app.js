@@ -139,7 +139,7 @@ if (port == null || port == "") {
   port = 3010;
 }
 
-app.listen (3010, function() {
+app.listen (port, function() {
     console.log("Server has started succesfully!");
 });
 
