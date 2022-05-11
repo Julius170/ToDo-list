@@ -13,7 +13,7 @@ app.set('view engine', "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
-mongoose.connect("mongodb://localhost/27017/to-do-listDB", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/to-do-listDB", {useNewUrlParser: true});
 
 const itemsSchema = {
     name: String
@@ -21,15 +21,15 @@ const itemsSchema = {
 
 const Item = mongoose.model("Item", itemsSchema)
 
-const item1 = new Item = ({
+const item1 = new Item ({
     name: "Welcome to your to-do list!"
 });
 
-const item2 = new Item = ({
+const item2 =  new Item ({
     name: "<-- Hit this to delete an item."
 });
 
-const item3 = new Item = ({
+const item3 =  new Item ({
     name: "Hit the + button to add a new item."
 });
 
@@ -124,7 +124,7 @@ app.get("/:anotherToDoList", (req, res) => {
                     items: defaultItems
                 });
                 list.save();
-                res.render("list", {listTitle:foundList.name, newListItems: foundList.items});
+                res.render("list", {listTitle:foundList, newListItems: foundList});
                 res.redirect("/"+ anotherToDoList);
             }
         }else {
@@ -136,7 +136,7 @@ app.get("/:anotherToDoList", (req, res) => {
 
 
 app.listen (3010, function() {
-    console.log("Server is runing on port http://localhost:3010/")
+    console.log("Server is runing on port http://localhost:3010")
 });
 
 
